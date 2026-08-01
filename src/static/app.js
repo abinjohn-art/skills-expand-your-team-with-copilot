@@ -519,6 +519,49 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    const activityUrl = `${window.location.origin}${window.location.pathname}`;
+    const shareMessage = `Check out ${name} at Mergington High School activities: ${details.description}`;
+    const encodedActivityUrl = encodeURIComponent(activityUrl);
+    const encodedShareMessage = encodeURIComponent(shareMessage);
+    const encodedCombinedMessage = encodeURIComponent(
+      `${shareMessage} ${activityUrl}`
+    );
+
+    const shareButtons = `
+      <div class="share-section">
+        <p class="share-label"><strong>Share:</strong></p>
+        <div class="share-buttons">
+          <a
+            class="share-button share-facebook"
+            href="https://www.facebook.com/sharer/sharer.php?u=${encodedActivityUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share ${name} on Facebook"
+          >
+            Facebook
+          </a>
+          <a
+            class="share-button share-x"
+            href="https://twitter.com/intent/tweet?text=${encodedShareMessage}&url=${encodedActivityUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share ${name} on X"
+          >
+            X
+          </a>
+          <a
+            class="share-button share-whatsapp"
+            href="https://wa.me/?text=${encodedCombinedMessage}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share ${name} on WhatsApp"
+          >
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    `;
+
     activityCard.innerHTML = `
       ${tagHtml}
       <h4>${name}</h4>
@@ -528,6 +571,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="tooltip-text">Regular meetings at this time throughout the semester</span>
       </p>
       ${capacityIndicator}
+      ${shareButtons}
       <div class="participants-list">
         <h5>Current Participants:</h5>
         <ul>
