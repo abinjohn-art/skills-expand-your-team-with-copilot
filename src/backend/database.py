@@ -22,8 +22,11 @@ def init_database():
 
     # Initialize activities if missing
     for name, details in initial_activities.items():
-        if activities_collection.count_documents({"_id": name}) == 0:
-            activities_collection.insert_one({"_id": name, **details})
+        activities_collection.update_one(
+            {"_id": name},
+            {"$setOnInsert": {"_id": name, **details}},
+            upsert=True
+        )
             
     # Initialize teacher accounts if empty
     if teachers_collection.count_documents({}) == 0:
