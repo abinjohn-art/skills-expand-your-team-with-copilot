@@ -50,6 +50,19 @@ body {
   font-size: 0.9rem;
 }
 
+body[data-theme="dark"] {
+  --primary: #283593;
+  --primary-light: #5f5fc4;
+  --primary-dark: #001064;
+  --background: #121212;
+  --surface: #1f1f1f;
+  --text-primary: #f0f0f0;
+  --text-secondary: #cfcfcf;
+  --border: #424242;
+  --border-light: #2f2f2f;
+  --border-focus: #5a5a5a;
+}
+
 header {
   text-align: center;
   padding: 12px 0;
@@ -617,6 +630,9 @@ footer {
   position: absolute;
   top: 10px;
   right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #user-status {
