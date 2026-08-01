@@ -27,6 +27,11 @@ def init_database():
             {"$setOnInsert": {"_id": name, **details}},
             upsert=True
         )
+        if "difficulty" in details:
+            activities_collection.update_one(
+                {"_id": name, "difficulty": {"$exists": False}},
+                {"$set": {"difficulty": details["difficulty"]}}
+            )
             
     # Initialize teacher accounts if empty
     if teachers_collection.count_documents({}) == 0:
@@ -38,6 +43,7 @@ initial_activities = {
     "Chess Club": {
         "description": "Learn strategies and compete in chess tournaments",
         "schedule": "Mondays and Fridays, 3:15 PM - 4:45 PM",
+        "difficulty": "beginner",
         "schedule_details": {
             "days": ["Monday", "Friday"],
             "start_time": "15:15",
@@ -49,6 +55,7 @@ initial_activities = {
     "Programming Class": {
         "description": "Learn programming fundamentals and build software projects",
         "schedule": "Tuesdays and Thursdays, 7:00 AM - 8:00 AM",
+        "difficulty": "intermediate",
         "schedule_details": {
             "days": ["Tuesday", "Thursday"],
             "start_time": "07:00",
@@ -71,6 +78,7 @@ initial_activities = {
     "Soccer Team": {
         "description": "Join the school soccer team and compete in matches",
         "schedule": "Tuesdays and Thursdays, 3:30 PM - 5:30 PM",
+        "difficulty": "advanced",
         "schedule_details": {
             "days": ["Tuesday", "Thursday"],
             "start_time": "15:30",
@@ -93,6 +101,7 @@ initial_activities = {
     "Art Club": {
         "description": "Explore various art techniques and create masterpieces",
         "schedule": "Thursdays, 3:15 PM - 5:00 PM",
+        "difficulty": "beginner",
         "schedule_details": {
             "days": ["Thursday"],
             "start_time": "15:15",
@@ -115,6 +124,7 @@ initial_activities = {
     "Math Club": {
         "description": "Solve challenging problems and prepare for math competitions",
         "schedule": "Tuesdays, 7:15 AM - 8:00 AM",
+        "difficulty": "intermediate",
         "schedule_details": {
             "days": ["Tuesday"],
             "start_time": "07:15",
@@ -148,6 +158,7 @@ initial_activities = {
     "Weekend Robotics Workshop": {
         "description": "Build and program robots in our state-of-the-art workshop",
         "schedule": "Saturdays, 10:00 AM - 2:00 PM",
+        "difficulty": "advanced",
         "schedule_details": {
             "days": ["Saturday"],
             "start_time": "10:00",
