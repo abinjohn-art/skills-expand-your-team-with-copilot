@@ -498,6 +498,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Format the schedule using the new helper function
     const formattedSchedule = formatSchedule(details);
+    const shareUrl = `${window.location.origin}${window.location.pathname}`;
+    const shareMessage = `Check out ${name} at Mergington High School! ${formattedSchedule}`;
+    const encodedShareUrl = encodeURIComponent(shareUrl);
+    const encodedShareMessage = encodeURIComponent(shareMessage);
 
     // Create activity tag
     const tagHtml = `
@@ -568,6 +572,38 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `
         }
+      </div>
+      <div class="share-section">
+        <p class="share-title">Share with friends:</p>
+        <div class="share-buttons">
+          <a
+            class="share-button share-facebook"
+            href="https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}&quote=${encodedShareMessage}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on Facebook"
+          >
+            Facebook
+          </a>
+          <a
+            class="share-button share-x"
+            href="https://twitter.com/intent/tweet?text=${encodedShareMessage}&url=${encodedShareUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on X"
+          >
+            X
+          </a>
+          <a
+            class="share-button share-whatsapp"
+            href="https://wa.me/?text=${encodedShareMessage}%20${encodedShareUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on WhatsApp"
+          >
+            WhatsApp
+          </a>
+        </div>
       </div>
     `;
 
